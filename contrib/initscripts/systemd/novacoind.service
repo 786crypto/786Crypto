@@ -1,0 +1,11 @@
+[Unit]
+Description=SevenEightSixCrypto daemon serivce
+After=network.target
+
+[Service]
+Type=simple
+User=SevenEightSixCrypto
+ExecStart=/opt/SevenEightSixCrypto/SevenEightSixCryptod
+
+[Install]
+WantedBy=multi-user.target

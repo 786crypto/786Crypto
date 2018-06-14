@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=SevenEightSixCrypto
+Comment=SevenEightSixCrypto P2P Cryptocurrency
+Comment[ru]=SevenEightSixCrypto, P2P криптовалюта
+Comment[fr]=SevenEightSixCrypto, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=SevenEightSixCrypto, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/SevenEightSixCrypto-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/SevenEightSixCrypto80.xpm
+MimeType=x-scheme-handler/SevenEightSixCrypto;
+Categories=Office;

@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# PROVIDE: SevenEightSixCrypto
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# SevenEightSixCrypto_enable (bool): Set to NO by default. Set this variable to YES if you want to enable SevenEightSixCrypto service.
+# SevenEightSixCrypto_config (path): Set to /usr/local/etc/SevenEightSixCrypto.conf by default.
+# SevenEightSixCrypto_user:  The user account SevenEightSixCrypto daemon runs as. It uses 'root' user by default.
+# SevenEightSixCrypto_group: The group account SevenEightSixCrypto daemon runs as. It uses 'wheel' group by default.
+# SevenEightSixCrypto_datadir (str): Default to "/var/db/SevenEightSixCrypto". Base data directory.
+
+. /etc/rc.subr
+
+name=SevenEightSixCrypto
+rcvar=SevenEightSixCrypto_enable
+
+: ${SevenEightSixCrypto_enable:=NO}
+: ${SevenEightSixCrypto_config=/usr/local/etc/SevenEightSixCrypto.conf}
+: ${SevenEightSixCrypto_datadir=/var/db/SevenEightSixCrypto}
+: ${SevenEightSixCrypto_user="root"}
+: ${SevenEightSixCrypto_group="wheel"}
+
+required_files=${SevenEightSixCrypto_config}
+command=/usr/local/bin/SevenEightSixCryptod
+SevenEightSixCrypto_chdir=${SevenEightSixCrypto_datadir}
+pidfile="${SevenEightSixCrypto_datadir}/SevenEightSixCryptod.pid"
+stop_cmd=SevenEightSixCrypto_stop
+command_args="-conf=${SevenEightSixCrypto_config} -datadir=${SevenEightSixCrypto_datadir} -daemon -pid=${pidfile}"
+start_precmd="${name}_prestart"
+
+SevenEightSixCrypto_create_datadir()
+{
+	echo "Creating data directory"
+	eval mkdir -p ${SevenEightSixCrypto_datadir}
+	[ $? -eq 0 ] && chown -R ${SevenEightSixCrypto_user}:${SevenEightSixCrypto_group} ${SevenEightSixCrypto_datadir}
+}
+
+SevenEightSixCrypto_prestart()
+{
+	if [ ! -d "${SevenEightSixCrypto_datadir}/." ]; then
+		SevenEightSixCrypto_create_datadir || return 1
+	fi
+}
+
+SevenEightSixCrypto_requirepidfile()
+{
+	if [ ! "0`check_pidfile ${pidfile} ${command}`" -gt 1 ]; then
+		echo "${name} not running? (check $pidfile)."
+		exit 1
+	fi
+}
+
+SevenEightSixCrypto_stop()
+{
+    SevenEightSixCrypto_requirepidfile
+
+	echo "Stopping ${name}."
+	eval ${command} -conf=${SevenEightSixCrypto_config} -datadir=${SevenEightSixCrypto_datadir} stop
+	wait_for_pids ${rc_pid}
+}
+
+load_rc_config $name
+run_rc_command "$1"

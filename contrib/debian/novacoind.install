@@ -1,0 +1,2 @@
+debian/bin/SevenEightSixCryptod usr/bin
+src/SevenEightSixCryptod usr/lib/SevenEightSixCrypto

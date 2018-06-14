@@ -1,0 +1,5 @@
+SevenEightSixCrypto-qt usr/bin
+share/pixmaps/SevenEightSixCrypto32.xpm usr/share/pixmaps
+share/pixmaps/SevenEightSixCrypto80.xpm usr/share/pixmaps
+debian/SevenEightSixCrypto-qt.desktop usr/share/applications
+debian/SevenEightSixCrypto-qt.protocol usr/share/kde4/services/

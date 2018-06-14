@@ -1,0 +1,9 @@
+Building SevenEightSixCrypto
+
+See doc/readme-qt.rst for instructions on building SevenEightSixCrypto Qt,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of SevenEightSixCrypto.
+
+See doc/build-*.txt for instructions on building SevenEightSixCryptod,
+the intended-for-services, no-graphical-interface, reference
+implementation of SevenEightSixCrypto.
